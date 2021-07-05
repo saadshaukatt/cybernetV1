@@ -17,7 +17,7 @@ namespace cybernetV1
         public void Gotourl(string url)
         {
             dr.Url = url;
-            dr.Manage().Window.Maximize();
+            //dr.Manage().Window.Maximize();
             // string exp_title = "https://staging.cyber.net.pk/Pages/Login.aspx";
             string act_title = dr.FindElement(By.ClassName("login-title")).Text;
             string exp_title = "PEOPLE HUB";
