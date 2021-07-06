@@ -102,7 +102,9 @@ namespace cybernetV1
                 0, "", "", "", "");
 
             Thread.Sleep(2000);
-            p1.Editsearch(2, "abc", "03452381372", "4454321231564", "abc@gmail.com", "abclinkedin", 2, 3, "aaaassssaaa");
+            p1.Editsearch(2, "abc", "03452381372", "4454321231564", "abc@gmail.com", "abclinkedin", 2, 3, "aaaassssaaa" , 
+                "C:\\NOOQI - Share Meal Plan to folks (ver 1.0).pdf",
+                "C:\\try1.docx");
         }
     }
 }
