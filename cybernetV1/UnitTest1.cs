@@ -98,11 +98,11 @@ namespace cybernetV1
            // p1.Applcantlist("149", 2, 3, 2, 
              //   2, "TEST NEW MAIL" , "8332-3344432", "45210-1568978-2", "testnewemail@sybrid.com" );
 
-            p1.Applcantlist("142", 0, 0, 0,
+            p1.Applcantlist("138", 0, 0, 0,
                 0, "", "", "", "");
 
             Thread.Sleep(2000);
-            p1.Editsearch(2, "abc", "03452381372", "4454321231564", "abc@gmail.com", "abclinkedin", 2, 3, "aaaassssaaa" , 
+            p1.Editsearch(jobtitle: 3, "abc", "0345-2381372", "44543-2123156-4", "abc@gmail.com", "abclinkedin", status: 2, abtus: 2, "aaaassssaaa" , 
                 "C:\\NOOQI - Share Meal Plan to folks (ver 1.0).pdf",
                 "C:\\try1.docx");
         }
