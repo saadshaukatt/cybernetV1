@@ -50,8 +50,8 @@ namespace cybernetV1
         By hearabtus = By.Id("MainContent_ddlHowHearAboutUS");
         By rmrk = By.Id("MainContent_txtRemark");
         By jobtitleadd = By.Id("MainContent_ddlJobTitleAdd");
-        By savebtn = By.Id("MainContent_btnSave"); 
-
+        By savebtn = By.Id("MainContent_btnSave");
+        By confirmbtn = By.ClassName("confirm");        
         #endregion
 
 
@@ -193,6 +193,7 @@ namespace cybernetV1
                 Console.WriteLine("FOUND FOUND");
 
             }
+            Thread.Sleep(2000);
             
             js.ExecuteScript("arguments[0].scrollIntoView();", edit);
             edit.Click();
@@ -203,7 +204,14 @@ namespace cybernetV1
             //Thread.Sleep(2000);
             var selectjobtitle = dr.FindElement(jobtitleadd);// selected
             var dropdownjobtitle = new SelectElement(selectjobtitle);
+            dropdownjobtitle.SelectByIndex(jobtitle-1);
             dropdownjobtitle.SelectByIndex(jobtitle);
+
+
+          /*  if(dr.FindElement(By.Id("MainContent_RequiredFieldValidator6")).Displayed)
+            {
+                MessageBox.Show("Job Title has no input");
+            }*/
 
 
             dr.FindElement(txtappname).Clear();
@@ -212,7 +220,7 @@ namespace cybernetV1
 
 
             //
-
+            
             dr.FindElement(cntnoadd).Clear();
             dr.FindElement(cntnoadd).SendKeys(number);
             Console.WriteLine("String Constraint Passed:edited num passed");
@@ -221,7 +229,7 @@ namespace cybernetV1
 
             //
 
-            dr.FindElement(cntnoadd).Clear();
+            dr.FindElement(cnicadd).Clear();
             dr.FindElement(cnicadd).SendKeys(cnic);
             Console.WriteLine("String Constraint Passed:edited cncn passed");
 
@@ -262,6 +270,12 @@ namespace cybernetV1
 
             dr.FindElement(savebtn).Click();
             Console.WriteLine("String Constraint Passed: edits saved");
+            string success = dr.FindElement(By.CssSelector("html>body>div:nth-of-type(3)>p")).Text;
+            string act_h = "Application updated successfully.";
+
+            Assert.That(act_h, Is.EqualTo(success));
+            //dr.SwitchTo().ActiveElement();
+            dr.FindElement(confirmbtn).Click();
 
 
             //File.WriteAllText("log.txt", displayMessage); 
