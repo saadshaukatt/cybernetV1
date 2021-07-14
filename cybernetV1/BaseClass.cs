@@ -18,6 +18,7 @@ namespace cybernetV1
         {
             var driver = new ChromeDriver();
             dr = driver;
+            dr.Manage().Window.Maximize();
             // _ = dr.Manage().Timeouts().ImplicitWait;
         }
 

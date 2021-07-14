@@ -30,8 +30,8 @@ namespace cybernetV1
         By applist = By.XPath("//span[text()='Applicant List']");
         By appID = By.Id("MainContent_txtApplicantID");
         By companyid = By.Id("MainContent_ddlcompanySearch");
-        By jobtitle= By.Id("MainContent_ddlJobTitleSearch");
-        By appSS= By.Id("MainContent_ddlApplicantSourceSearch");
+        By jobtitle = By.Id("MainContent_ddlJobTitleSearch");
+        By appSS = By.Id("MainContent_ddlApplicantSourceSearch");
 
         By jobSS = By.Id("MainContent_ddlJobStatusSearch");
         By namesearch = By.Id("MainContent_txtApplicantNameSearch");
@@ -42,16 +42,16 @@ namespace cybernetV1
 
         By editbtn = By.XPath("/html/body/form/div[3]/div/div[2]/div[3]/div[2]/div/div/div/div[2]/div[2]/div/div/table/tbody/tr/td[8]/input[1]");
         By txtappname = By.Id("MainContent_txtApplicantNameAdd");
-        By cntnoadd= By.Id("MainContent_txtContactNoAdd");
+        By cntnoadd = By.Id("MainContent_txtContactNoAdd");
         By cnicadd = By.Id("MainContent_txtcnicadd");
         By emailadd = By.Id("MainContent_txtPersonalEmailAdd");
         By linedinid = By.Id("MainContent_txtLinkedInUrl");
-        By jobstatus= By.Id("MainContent_ddlJobStatus");
+        By jobstatus = By.Id("MainContent_ddlJobStatus");
         By hearabtus = By.Id("MainContent_ddlHowHearAboutUS");
         By rmrk = By.Id("MainContent_txtRemark");
         By jobtitleadd = By.Id("MainContent_ddlJobTitleAdd");
         By savebtn = By.Id("MainContent_btnSave");
-        By confirmbtn = By.ClassName("confirm");        
+        By confirmbtn = By.ClassName("confirm");
         #endregion
 
 
@@ -85,7 +85,7 @@ namespace cybernetV1
         }
 
 
-        public void Login(string id, string pw )
+        public void Login(string id, string pw)
         {
             dr.FindElement(login).SendKeys(id);
             Console.WriteLine("String Constraint Passed: login");
@@ -111,7 +111,7 @@ namespace cybernetV1
 
 
 
-        public void Applcantlist(string ID, int company ,int job, int source, int status , string name , string cellno, string cnic, string email)
+        public void Applcantlist(string ID, int company, int job, int source, int status, string name, string cellno, string cnic, string email)
         {
 
             dr.FindElement(applist).Click();
@@ -176,25 +176,25 @@ namespace cybernetV1
         }
 
 
-        public void Editsearch(int jobtitle,string name , string number,string cnic,
-            string email , string linkedin , int status, int abtus, string rmks, string upload1, string upload2)
+        public void Editsearch(int jobtitle, string name, string number, string cnic,
+            string email, string linkedin, int status, int abtus, string rmks, string upload1, string upload2)
         {
             Thread.Sleep(5000);
             //html/body/form/div[3]/div/div[2]/div[3]/div[2]/div/div/div/div[2]/div[2]/div/div/table/tbody/tr/td[8]/input[1]
-           var edit= dr.FindElement(editbtn);
-           // IWebElement edit = dr.FindElement(By.Name("ctl00$MainContent$rpt$ctl00$lbEdit"));//ctl00$MainContent$rpt$ctl00$lbEdit 
-               
+            var edit = dr.FindElement(editbtn);
+            // IWebElement edit = dr.FindElement(By.Name("ctl00$MainContent$rpt$ctl00$lbEdit"));//ctl00$MainContent$rpt$ctl00$lbEdit 
+
             bool isElementDisplayed = dr.FindElement(editbtn).Displayed;
 
             IJavaScriptExecutor js = (IJavaScriptExecutor)dr;
 
-            if (isElementDisplayed==true)
+            if (isElementDisplayed == true)
             {
                 Console.WriteLine("FOUND FOUND");
 
             }
             Thread.Sleep(2000);
-            
+
             js.ExecuteScript("arguments[0].scrollIntoView();", edit);
             edit.Click();
 
@@ -204,14 +204,14 @@ namespace cybernetV1
             //Thread.Sleep(2000);
             var selectjobtitle = dr.FindElement(jobtitleadd);// selected
             var dropdownjobtitle = new SelectElement(selectjobtitle);
-            dropdownjobtitle.SelectByIndex(jobtitle-1);
+            dropdownjobtitle.SelectByIndex(jobtitle - 1);
             dropdownjobtitle.SelectByIndex(jobtitle);
 
 
-          /*  if(dr.FindElement(By.Id("MainContent_RequiredFieldValidator6")).Displayed)
-            {
-                MessageBox.Show("Job Title has no input");
-            }*/
+            /*  if(dr.FindElement(By.Id("MainContent_RequiredFieldValidator6")).Displayed)
+              {
+                  MessageBox.Show("Job Title has no input");
+              }*/
 
 
             dr.FindElement(txtappname).Clear();
@@ -220,7 +220,7 @@ namespace cybernetV1
 
 
             //
-            
+
             dr.FindElement(cntnoadd).Clear();
             dr.FindElement(cntnoadd).SendKeys(number);
             Console.WriteLine("String Constraint Passed:edited num passed");
@@ -283,6 +283,302 @@ namespace cybernetV1
 
 
         }
+
+
+
+        public void ClickAppraisalPeriod()
+        {
+            dr.FindElement(By.CssSelector("ul#side-menu>li:nth-of-type(8)>a")).Click();
+
+            Thread.Sleep(2000);
+            dr.FindElement(By.LinkText("Period")).Click();
+        }
+
+        #region Period
+        public void PeriodAddstartdate(string pname, string date)
+        {
+            dr.FindElement(By.LinkText("Add")).Click();
+            dr.SwitchTo().ActiveElement();
+            dr.FindElement(By.Id("MainContent_txtNameAdd")).SendKeys(pname);
+
+            //FIND DATE
+            dr.FindElement(By.Id("MainContent_txtPeriodStartDate")).Click();
+            //String defaultdate = dr.FindElement(By.XPath("//th[text()='July 2021']")).Text;
+            string defaultdate = dr.FindElement(By.XPath("(//th[@class='datepicker-switch'])[1]")).Text;
+
+            //
+            string month = defaultdate.Substring(0, defaultdate.IndexOf(" "));
+            string year = defaultdate.Substring(defaultdate.IndexOf(" ") + 1);
+            Console.WriteLine(month + "|" + year);
+            //
+
+            string indate = date.Substring(0, 2);
+            string inmonth = date.Substring(date.IndexOf("/") + 1, date.LastIndexOf("/") - 3);
+            string inyear = date.Substring(date.LastIndexOf("/") + 1);
+            Console.WriteLine(indate + "|" + inmonth + "|" + inyear);
+            string threeletterinmonth = inmonth.Substring(0, 3);
+            Console.WriteLine(indate + "|" + threeletterinmonth + "|" + inyear);
+
+            //
+
+
+            // year input
+            if (int.Parse(inyear) == int.Parse(year))
+            {
+
+                dr.FindElement(By.XPath("(//th[@class='datepicker-switch'])[1]")).Click();
+
+                dr.FindElement(By.XPath("//span[text()='" + threeletterinmonth + "']")).Click();
+
+                dr.FindElement(By.XPath("//td[text()='" + indate + "']")).Click();
+            }
+
+            if (int.Parse(inyear) > int.Parse(year) | int.Parse(inyear) < int.Parse(year))
+            {
+                dr.FindElement(By.XPath("(//th[@class='datepicker-switch'])[1]")).Click();
+
+                dr.FindElement(By.XPath("(//th[@class='datepicker-switch'])[2]")).Click();
+
+                dr.FindElement(By.XPath("//span[text()='" + inyear + "']")).Click();
+
+                dr.FindElement(By.XPath("//span[text()='" + threeletterinmonth + "']")).Click();
+
+                dr.FindElement(By.XPath("//td[text()='" + indate + "']")).Click();
+
+            }
+
+
+        }
+
+
+
+        public void Periodaddenddate(string date)
+        {
+
+            dr.FindElement(By.Id("MainContent_txtPeriodEndDate")).Click();
+
+            string defaultdate = dr.FindElement(By.XPath("(//th[@class='datepicker-switch'])[1]")).Text;
+
+            string month = defaultdate.Substring(0, defaultdate.IndexOf(" "));
+            string year = defaultdate.Substring(defaultdate.IndexOf(" ") + 1);
+            Console.WriteLine(month + "|" + year);
+
+            string indate = date.Substring(0, 2);
+            string inmonth = date.Substring(date.IndexOf("/") + 1, date.LastIndexOf("/") - 3);
+            string inyear = date.Substring(date.LastIndexOf("/") + 1);
+            Console.WriteLine(indate + "|" + inmonth + "|" + inyear);
+            string threeletterinmonth = inmonth.Substring(0, 3);
+            Console.WriteLine(indate + "|" + threeletterinmonth + "|" + inyear);
+
+
+            // year input
+            if (int.Parse(inyear) == int.Parse(year))
+            {
+
+                dr.FindElement(By.XPath("(//th[@class='datepicker-switch'])[1]")).Click();
+
+                dr.FindElement(By.XPath("//span[text()='" + threeletterinmonth + "']")).Click();
+
+                dr.FindElement(By.XPath("//td[text()='" + indate + "']")).Click();
+            }
+
+            if (int.Parse(inyear) > int.Parse(year) | int.Parse(inyear) < int.Parse(year))
+            {
+                dr.FindElement(By.XPath("(//th[@class='datepicker-switch'])[1]")).Click();
+
+                dr.FindElement(By.XPath("(//th[@class='datepicker-switch'])[2]")).Click();
+
+                dr.FindElement(By.XPath("//span[text()='" + inyear + "']")).Click();
+
+                dr.FindElement(By.XPath("//span[text()='" + threeletterinmonth + "']")).Click();
+
+                dr.FindElement(By.XPath("//td[text()='" + indate + "']")).Click();
+
+            }
+
+        }
+
+
+        public void Deadlinedate(string date)
+        {
+
+            dr.FindElement(By.Id("MainContent_txtDeadline")).Click();
+
+            string defaultdate = dr.FindElement(By.XPath("(//th[@class='datepicker-switch'])[1]")).Text;
+
+            string month = defaultdate.Substring(0, defaultdate.IndexOf(" "));
+            string year = defaultdate.Substring(defaultdate.IndexOf(" ") + 1);
+            Console.WriteLine(month + "|" + year);
+
+            string indate = date.Substring(0, 2);
+            string inmonth = date.Substring(date.IndexOf("/") + 1, date.LastIndexOf("/") - 3);
+            string inyear = date.Substring(date.LastIndexOf("/") + 1);
+            Console.WriteLine(indate + "|" + inmonth + "|" + inyear);
+            string threeletterinmonth = inmonth.Substring(0, 3);
+            Console.WriteLine(indate + "|" + threeletterinmonth + "|" + inyear);
+
+
+            // year input
+            if (int.Parse(inyear) == int.Parse(year))
+            {
+
+                dr.FindElement(By.XPath("(//th[@class='datepicker-switch'])[1]")).Click();
+
+                dr.FindElement(By.XPath("//span[text()='" + threeletterinmonth + "']")).Click();
+
+                dr.FindElement(By.XPath("//td[text()='" + indate + "']")).Click();
+            }
+
+            if (int.Parse(inyear) > int.Parse(year) | int.Parse(inyear) < int.Parse(year))
+            {
+                dr.FindElement(By.XPath("(//th[@class='datepicker-switch'])[1]")).Click();
+
+                dr.FindElement(By.XPath("(//th[@class='datepicker-switch'])[2]")).Click();
+
+                dr.FindElement(By.XPath("//span[text()='" + inyear + "']")).Click();
+
+                dr.FindElement(By.XPath("//span[text()='" + threeletterinmonth + "']")).Click();
+
+                dr.FindElement(By.XPath("//td[text()='" + indate + "']")).Click();
+
+            }
+
+        }
+
+        public void Maxjoindate(string date)
+        {
+
+            dr.FindElement(By.Id("MainContent_txtMaxJoiningDate")).Click();
+
+            string defaultdate = dr.FindElement(By.XPath("(//th[@class='datepicker-switch'])[1]")).Text;
+
+            string month = defaultdate.Substring(0, defaultdate.IndexOf(" "));
+            string year = defaultdate.Substring(defaultdate.IndexOf(" ") + 1);
+            Console.WriteLine(month + "|" + year);
+
+            string indate = date.Substring(0, 2);
+            string inmonth = date.Substring(date.IndexOf("/") + 1, date.LastIndexOf("/") - 3);
+            string inyear = date.Substring(date.LastIndexOf("/") + 1);
+            Console.WriteLine(indate + "|" + inmonth + "|" + inyear);
+            string threeletterinmonth = inmonth.Substring(0, 3);
+            Console.WriteLine(indate + "|" + threeletterinmonth + "|" + inyear);
+
+
+            // year input
+            if (int.Parse(inyear) == int.Parse(year))
+            {
+
+                dr.FindElement(By.XPath("(//th[@class='datepicker-switch'])[1]")).Click();
+
+                dr.FindElement(By.XPath("//span[text()='" + threeletterinmonth + "']")).Click();
+
+                dr.FindElement(By.XPath("//td[text()='" + indate + "']")).Click();
+            }
+
+            if (int.Parse(inyear) > int.Parse(year) | int.Parse(inyear) < int.Parse(year))
+            {
+                dr.FindElement(By.XPath("(//th[@class='datepicker-switch'])[1]")).Click();
+
+                dr.FindElement(By.XPath("(//th[@class='datepicker-switch'])[2]")).Click();
+
+                dr.FindElement(By.XPath("//span[text()='" + inyear + "']")).Click();
+
+                dr.FindElement(By.XPath("//span[text()='" + threeletterinmonth + "']")).Click();
+
+                dr.FindElement(By.XPath("//td[text()='" + indate + "']")).Click();
+
+            }
+
+        }
+
+        #endregion Period
+
+
+
+        public void ClickAppraisalTraintscompetencies()
+        {
+            dr.FindElement(By.CssSelector("ul#side-menu>li:nth-of-type(8)>a")).Click();
+
+            Thread.Sleep(2000);
+            dr.FindElement(By.XPath("//a[@href='/Pages/Appraisal/Setup/SetupKPI.aspx']")).Click();
+
+        }
+
+        #region
+        public void Edit(string TnC, string desc, string click)
+        {
+            IJavaScriptExecutor js = (IJavaScriptExecutor)dr;
+
+            var edit = dr.FindElement(By.Id("MainContent_rpt_lbEdit_0"));
+
+            js.ExecuteScript("arguments[0].scrollIntoView();", edit);
+
+            edit.Click();
+
+            dr.SwitchTo().ActiveElement();
+            Thread.Sleep(2000);
+
+            dr.FindElement(By.Id("MainContent_txtKpi")).Clear();
+            dr.FindElement(By.Id("MainContent_txtKpi")).SendKeys(TnC);
+
+            dr.FindElement(By.Id("MainContent_txtKpiDesc")).Clear();
+            dr.FindElement(By.Id("MainContent_txtKpiDesc")).SendKeys(desc);
+
+            if (click == "A")
+            {
+                dr.FindElement(By.Id("MainContent_chkCategory_0")).Click();
+
+            }
+
+            if (click == "B")
+            {
+                dr.FindElement(By.Id("MainContent_chkCategory_1")).Click();
+
+            }
+            #endregion
+
+        }
+
+        public void ClickAppraisalEML()
+        {
+            dr.FindElement(By.CssSelector("ul#side-menu>li:nth-of-type(8)>a")).Click();
+
+            Thread.Sleep(2000);
+            dr.FindElement(By.LinkText("Employee Mapping List")).Click();
+        }
+
+        public void EMLsearch(string name)
+        {
+            dr.FindElement(By.Id("MainContent_txtEmployeeName")).SendKeys(name);
+            dr.FindElement(By.Id("MainContent_btnSearch")).Click();
+        }
+
+        public void EMLedit(int company,int division,int department,int designation ,
+            int jobtitle, string ename,string ecode, int search)
+        {
+            dr.FindElement(By.Id("MainContent_rpt_lbEdit_0")).Click();
+
+
+           // var ctlMainContentddlCompany = dr.FindElement(By.Id("MainContent_ddlCompany"));
+            new SelectElement(dr.FindElement(By.Id("MainContent_ddlCompany"))).SelectByIndex(company);
+            Thread.Sleep(5000);
+            new SelectElement(dr.FindElement(By.Id("MainContent_ddlBusinessUnit"))).SelectByIndex(division);
+            Thread.Sleep(1000);
+            new SelectElement(dr.FindElement(By.Id("MainContent_ddlDepartment"))).SelectByIndex(department);
+            Thread.Sleep(1000);
+            new SelectElement(dr.FindElement(By.Id("MainContent_ddlJobCategory"))).SelectByIndex(jobtitle);
+            Thread.Sleep(1000);
+            new SelectElement(dr.FindElement(By.Id("MainContent_ddlDesignation"))).SelectByIndex(designation);
+            Thread.Sleep(1000);
+            dr.FindElement(By.Id("MainContent_txtEmployeeName")).SendKeys(ename);
+            dr.FindElement(By.Id("MainContent_txtEmployeeCode")).SendKeys(ecode);
+            new SelectElement(dr.FindElement(By.Id("MainContent_ddlSearchFor"))).SelectByIndex(search);
+            Thread.Sleep(1000);
+            dr.FindElement(By.Id("MainContent_btnSearch")).Click();
+
+        }
+
+
 
     }
 }
