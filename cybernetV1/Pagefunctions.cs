@@ -491,9 +491,25 @@ namespace cybernetV1
 
         }
 
+        public void Periodsave_close (bool save)
+        {
+            if (save == true)
+            {
+                dr.FindElement(By.Id("MainContent_btnAdd")).Click();
+            }
+            else
+            {
+                dr.FindElement(By.XPath("(//span[text()='×'])[1]")).Click();
+            }
+        }
+
         #endregion Period
 
 
+
+
+
+        #region Appraisals
 
         public void ClickAppraisalTraintscompetencies()
         {
@@ -503,9 +519,13 @@ namespace cybernetV1
             dr.FindElement(By.XPath("//a[@href='/Pages/Appraisal/Setup/SetupKPI.aspx']")).Click();
 
         }
+        public void TnCsearch(string search)
+        {
+            dr.FindElement(By.Id("MainContent_txtSearch")).SendKeys(search);
+            dr.FindElement(By.Id("MainContent_btnSearch")).Click();
 
-        #region
-        public void Edit(string TnC, string desc, string click)
+        }
+        public void TnCEdit(string TnC, string desc, string click)
         {
             IJavaScriptExecutor js = (IJavaScriptExecutor)dr;
 
@@ -535,9 +555,27 @@ namespace cybernetV1
                 dr.FindElement(By.Id("MainContent_chkCategory_1")).Click();
 
             }
-            #endregion
+           
 
         }
+
+        public void TnCsave_close(bool save)
+        {
+            if (save == true)
+            {
+                dr.FindElement(By.Id("MainContent_btnAdd")).Click();
+            }
+            else
+            {
+                dr.FindElement(By.XPath("(//span[text()='×'])[1]")).Click();
+            }
+        }
+
+
+        #endregion
+
+
+
 
         public void ClickAppraisalEML()
         {

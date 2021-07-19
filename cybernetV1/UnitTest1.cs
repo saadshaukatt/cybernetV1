@@ -96,28 +96,35 @@ namespace cybernetV1
             p1.Login("insiya.tejani@cyber.net.pk ", "1n5iy@MT.pplhub");
             p1.closepopup();
 
-            // p1.Applcantlist("149", 2, 3, 2, 
-            //   2, "TEST NEW MAIL" , "8332-3344432", "45210-1568978-2", "testnewemail@sybrid.com" );
+            /* p1.Applcantlist("149", 2, 3, 2, 
+               2, "TEST NEW MAIL" , "8332-3344432", "45210-1568978-2", "testnewemail@sybrid.com" );
 
-            // p1.Applcantlist("136", 0, 0, 0, 0, "", "", "", "");
+             p1.Applcantlist("136", 0, 0, 0, 0, "", "", "", "");
 
-            //Thread.Sleep(2000);
-            /*p1.Editsearch(jobtitle: 1, "final", "03333331372", "44543-2123156-4", "final@gmail.com", "abclinkedin", status: 1, abtus: 2, "aaaassssaaa" , 
+            Thread.Sleep(2000);
+            p1.Editsearch(jobtitle: 1, "final", "03333331372", "44543-2123156-4", "final@gmail.com", "abclinkedin", status: 1, abtus: 2, "aaaassssaaa" , 
                 "C:\\NOOQI - Share Meal Plan to folks (ver 1.0).pdf",
                 "C:\\try1.docx");*/
 
-            /* p1.ClickAppraisalPeriod();
+             p1.ClickAppraisalPeriod();
              p1.PeriodAddstartdate("saad", "15/March/2021");
              p1.Periodaddenddate("20/March/2021");
              p1.Deadlinedate("30/June/2022");
-             p1.Maxjoindate("30/July/2022");*/
+             p1.Maxjoindate("30/July/2022");
+             p1.Periodsave_close(false);
 
-          /*  p1.ClickAppraisalTraintscompetencies();
-            p1.Edit("sasdasd", "sdasdasad", "A");*/
+             p1.ClickAppraisalTraintscompetencies();
+             Thread.Sleep(2000);
+             p1.TnCEdit("sasdasd", "sdasdasad", "A");
+             p1.TnCsave_close(false);
+
 
             p1.ClickAppraisalEML();
             p1.EMLsearch("DANISH ALI LAKHANI");
-            p1.EMLedit(1,1,1,1,1,"danish","80085",1);
+            p1.EMLedit(1, 1, 1, 1, 1, "danish", "80085", 1);
+
+            //   C:\Program Files\MongoDB\Server\5.0\bin\
+            //   C:\Program Files\MongoDB\Server\5.0\log\
 
 
         }
